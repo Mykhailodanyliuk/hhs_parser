@@ -1,6 +1,7 @@
 import datetime
 import os
 import shutil
+import time
 from csv import reader
 from zipfile import ZipFile
 
@@ -254,6 +255,9 @@ def upload_hhs_data():
 
 if __name__ == '__main__':
     while True:
+        start_time = time.time()
         client = pymongo.MongoClient('mongodb://localhost:27017')
         upload_hhs_data()
         client.close()
+        work_time = int(time.time() - start_time)
+        time.sleep(abs(work_time % 14400 - 14400))
