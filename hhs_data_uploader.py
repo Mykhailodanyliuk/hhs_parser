@@ -227,7 +227,7 @@ def upload_hhs_data():
                     if (row[1] == '1') and not nppes_data_individual_collection.find_one({'npi': row[0]}):
                         nppes_data_individual_collection.insert_one(
                             {'npi': row[0], 'upload_at': datetime.datetime.now(), 'data': npi_data})
-                    elif row[1] == '2' and nppes_data_entities_collection.find_one({'npi': row[0]}):
+                    elif row[1] == '2' and not nppes_data_entities_collection.find_one({'npi': row[0]}):
                         nppes_data_entities_collection.insert_one(
                             {'npi': row[0], 'upload_at': datetime.datetime.now(), 'data': npi_data})
     delete_directory(path_to_directory)
